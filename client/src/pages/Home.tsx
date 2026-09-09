@@ -2,12 +2,13 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Instagram, Search, ShoppingBag, Sparkles, X } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { initialProducts, sectionLabels, type ProductSection, type Product } from "@/data/catalog";
+import { generatedProducts } from "@/data/generated-products";
 
 type MediaItem = { kind: "image" | "video"; url: string; label: string };
 
 function mediaFor(product: Product): MediaItem[] {
   return [
-    ...(product.imageUrl ? [{ kind: "image" as const, url: product.imageUrl, label: "Imagem" }] : []),
+    ...((product.gallery?.length ? product.gallery : product.imageUrl ? [product.imageUrl] : []).map((url, index) => ({ kind: "image" as const, url, label: index === 0 ? "Capa" : `Foto ${index + 1}` }))),
     ...(product.videoUrl ? [{ kind: "video" as const, url: product.videoUrl, label: "Vídeo" }] : []),
   ];
 }
@@ -73,7 +74,8 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const catalogQuery = trpc.catalog.list.useQuery();
   const visitMutation = trpc.catalog.visit.useMutation();
-  const products = (catalogQuery.data?.length ? catalogQuery.data : initialProducts) as Product[];
+  const fallbackProducts = generatedProducts.length ? [...initialProducts.filter((product) => product.section === "store"), ...generatedProducts] : initialProducts;
+  const products = (catalogQuery.data?.length ? catalogQuery.data : fallbackProducts) as Product[];
   const filtered = useMemo(() => products.filter((product) => product.name.toLowerCase().includes(query.toLowerCase())), [products, query]);
   const storeProducts = filtered.filter((product) => product.section === "store" && product.active);
   const findsProducts = filtered.filter((product) => product.section === "finds" && product.active);

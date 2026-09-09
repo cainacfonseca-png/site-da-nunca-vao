@@ -5,6 +5,7 @@ export interface Product {
   name: string;
   section: ProductSection;
   imageUrl?: string;
+  gallery?: string[];
   videoUrl?: string;
   purchaseUrl: string;
   alternatePurchaseUrl?: string;
