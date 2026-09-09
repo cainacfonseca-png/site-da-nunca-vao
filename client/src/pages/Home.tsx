@@ -75,7 +75,10 @@ export default function Home() {
   const catalogQuery = trpc.catalog.list.useQuery();
   const visitMutation = trpc.catalog.visit.useMutation();
   const fallbackProducts = generatedProducts.length ? [...initialProducts.filter((product) => product.section === "store"), ...generatedProducts] : initialProducts;
-  const products = (catalogQuery.data?.length ? catalogQuery.data : fallbackProducts) as Product[];
+  const databaseProducts = (catalogQuery.data ?? []) as Product[];
+  const products = (generatedProducts.length
+    ? [...databaseProducts.filter((product) => product.section === "store"), ...generatedProducts]
+    : databaseProducts.length ? databaseProducts : fallbackProducts) as Product[];
   const filtered = useMemo(() => products.filter((product) => product.name.toLowerCase().includes(query.toLowerCase())), [products, query]);
   const storeProducts = filtered.filter((product) => product.section === "store" && product.active);
   const findsProducts = filtered.filter((product) => product.section === "finds" && product.active);
