@@ -17,8 +17,8 @@ if (existsSync(productsDir)) {
     const files = readdirSync(folderPath, { withFileTypes: true }).filter((entry) => entry.isFile()).map((entry) => entry.name);
     const images = files.filter((file) => imageExtensions.has(file.slice(file.lastIndexOf(".")).toLowerCase()));
     const videos = files.filter((file) => videoExtensions.has(file.slice(file.lastIndexOf(".")).toLowerCase()));
-    const linkFile = files.find((file) => file.toLowerCase().startsWith("link") && file.toLowerCase().endsWith(".txt"));
-    const purchaseUrl = linkFile ? readFileSync(join(folderPath, linkFile), "utf8").trim() : "";
+    const textFiles = files.filter((file) => file.toLowerCase().endsWith(".txt"));
+    const purchaseUrl = textFiles.map((file) => readFileSync(join(folderPath, file), "utf8").trim()).map((text) => text.match(/https?:\/\/\S+/)?.[0] ?? "").find(Boolean) ?? "";
     if (!purchaseUrl || (!images.length && !videos.length)) return;
     const folderRelative = relative(join(root, "client", "public"), folderPath).replaceAll("\\", "/");
     const imageUrls = images.map((file) => urlPath(`${folderRelative}/${file}`));
