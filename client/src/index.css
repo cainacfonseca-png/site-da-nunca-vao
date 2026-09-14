@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=DM+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 :root { font-family: 'Space Grotesk', sans-serif; color: #f7f7f3; background: #0b0b0d; font-synthesis: none; text-rendering: optimizeLegibility; }
@@ -143,3 +143,38 @@ button, input { font: inherit; }
 .gallery-description { margin: 16px 0 0; color: #a4a4a0; font-size: 13px; line-height: 1.5; }
 .gallery-buy { margin-top: 18px; }
 @media (max-width: 600px) { .gallery-dialog { padding: 17px; } .gallery-stage { min-height: 230px; } .buy-actions { gap: 8px; } .details-link { width: 100%; text-align: left; } }
+
+
+/* Nunca Vão brand refresh — Pomelli brand book */
+:root { font-family: 'Bricolage Grotesque', sans-serif; color: #fff; background: #000; }
+body, .site-shell { background: #000; }
+.site-header { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,.14); }
+.brand { gap: 12px; }
+.brand-logo { width: 82px; height: 42px; object-fit: contain; object-position: left center; }
+.brand-name { display: none; }
+.brand-badge { display: none; }
+.footer-brand .brand-badge { display: none; }
+.footer-logo { width: 92px; height: 42px; object-fit: contain; }
+.instagram-link { background: linear-gradient(135deg, #f9c626 0%, #ce2027 48%, #8b2bb9 100%); border: 0; color: #fff; }
+.instagram-link:hover { transform: translateY(-2px) rotate(-4deg); border: 0; color: #fff; }
+.hero { min-height: 640px; }
+.hero::before { background: radial-gradient(circle, rgba(206,32,39,.22), transparent 62%); }
+.hero-tag, .eyebrow, .product-kicker { color: #ce2027; }
+.hero h1 { font-weight: 600; letter-spacing: -.07em; }
+.hero h1 em { color: #b0b7ca; }
+.primary-button, .buy-link { background: #ce2027; color: #fff; }
+.primary-button:hover, .buy-link:hover { background: #f0444b; }
+.secondary-button { border-color: #b0b7ca; color: #fff; }
+.secondary-button:hover { border-color: #f9c626; color: #f9c626; }
+.text-button { display: inline-flex; align-items: center; min-height: 45px; color: #b0b7ca; padding: 0 8px; font-size: 13px; }
+.text-button:hover { color: #f9c626; }
+.hero-orbit { border-color: rgba(206,32,39,.3); }
+.orbit-two { border-color: rgba(249,198,38,.4); }
+.hero-cross { position: absolute; right: 12%; top: 45%; width: 170px; height: 170px; opacity: .08; background: linear-gradient(90deg, transparent 40%, #ce2027 40%, #ce2027 60%, transparent 60%), linear-gradient(0deg, transparent 40%, #ce2027 40%, #ce2027 60%, transparent 60%); transform: rotate(45deg); }
+.hero-stamp strong { color: #ce2027; }
+.catalog-toolbar { border-top-color: #ce2027; }
+.product-card:hover { border-color: #ce2027; }
+.empty-mark { border-color: #ce2027; color: #f9c626; }
+.site-footer { border-top-color: rgba(206,32,39,.65); }
+.gallery-thumb.active { border-color: #ce2027; }
+@media (max-width: 700px) { .brand-logo { width: 70px; } .hero-cross { right: -20px; top: 52%; width: 120px; height: 120px; } }
