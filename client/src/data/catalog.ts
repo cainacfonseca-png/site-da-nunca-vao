@@ -23,7 +23,7 @@ export const sectionLabels: Record<ProductSection, { eyebrow: string; title: str
   finds: {
     eyebrow: "Curadoria da casa",
     title: "Achadinhos Shopee",
-    description: "Produtos que encontramos, testamos na curadoria e achamos que merecem aparecer por aqui.",
+    description: "Produtos que encontramos e escolhemos porque têm a cara de quem vive a paixão cruzmaltina.",
   },
 };
 
