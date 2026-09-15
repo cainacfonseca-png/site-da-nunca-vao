@@ -15,7 +15,14 @@ if (existsSync(productsDir)) {
   folders.forEach((folder, index) => {
     const folderPath = join(productsDir, folder.name);
     const files = readdirSync(folderPath, { withFileTypes: true }).filter((entry) => entry.isFile()).map((entry) => entry.name);
-    const images = files.filter((file) => imageExtensions.has(file.slice(file.lastIndexOf(".")).toLowerCase()));
+    const images = files
+      .filter((file) => imageExtensions.has(file.slice(file.lastIndexOf(".")).toLowerCase()))
+      .sort((a, b) => {
+        const aIsCover = a.replace(/\.[^.]+$/, "").toLowerCase().startsWith("capa");
+        const bIsCover = b.replace(/\.[^.]+$/, "").toLowerCase().startsWith("capa");
+        if (aIsCover !== bIsCover) return aIsCover ? -1 : 1;
+        return a.localeCompare(b, "pt-BR");
+      });
     const videos = files.filter((file) => videoExtensions.has(file.slice(file.lastIndexOf(".")).toLowerCase()));
     const textFiles = files.filter((file) => file.toLowerCase().endsWith(".txt"));
     const purchaseUrl = textFiles.map((file) => readFileSync(join(folderPath, file), "utf8").trim()).map((text) => text.match(/https?:\/\/\S+/)?.[0] ?? "").find(Boolean) ?? "";
